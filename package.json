@@ -3,7 +3,6 @@
       "name": "ERP System for SMEs (Community)",
       "version": "0.1.0",
       "private": true,
-      "type": "module",
       "dependencies": {
           "@jsr/supabase__supabase-js": "^2.49.8",
           "@radix-ui/react-accordion": "^1.2.3",
@@ -55,13 +54,10 @@
       "devDependencies": {
           "@types/node": "^20.10.0",
           "@vitejs/plugin-react-swc": "^3.10.2",
-          "dotenv": "^16.4.5",
           "vite": "6.3.5"
       },
       "scripts": {
           "dev": "vite",
-          "build": "vite build",
-          "seed": "node scripts/seed-users.js",
-          "dev:seed": "npm run seed && npm run dev"
+          "build": "vite build"
       }
   }

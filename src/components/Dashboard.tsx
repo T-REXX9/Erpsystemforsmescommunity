@@ -15,7 +15,6 @@ import {
   Calculator,
 } from 'lucide-react';
 import { Badge } from './ui/badge';
-import { TYPOGRAPHY, ICON_SIZES, SPACING } from '../constants';
 
 interface DashboardProps {
   onQuickInvoice?: () => void;
@@ -111,21 +110,21 @@ export function Dashboard({ onQuickInvoice, onQuickBilling }: DashboardProps) {
   };
 
   return (
-    <div className={SPACING.pageContainer}>
+    <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className={TYPOGRAPHY.pageTitle}>Dashboard</h1>
-          <p className={TYPOGRAPHY.pageSubtitle}>Welcome back! Here's what's happening with your business.</p>
+          <h1>Dashboard</h1>
+          <p className="text-muted-foreground">Welcome back! Here's what's happening with your business.</p>
         </div>
         <div className="flex gap-2">
           <Button onClick={onQuickInvoice} className="gap-2 bg-blue-600 hover:bg-blue-700">
-            <Zap className={ICON_SIZES.buttonDefault} />
-            <span className={TYPOGRAPHY.body}>Quick Invoice</span>
+            <Zap className="w-4 h-4" />
+            Quick Invoice
           </Button>
           <Button onClick={onQuickBilling} variant="outline" className="gap-2">
-            <Receipt className={ICON_SIZES.buttonDefault} />
-            <span className={TYPOGRAPHY.body}>Quick Bill</span>
+            <Receipt className="w-4 h-4" />
+            Quick Bill
           </Button>
         </div>
       </div>
@@ -134,12 +133,12 @@ export function Dashboard({ onQuickInvoice, onQuickBilling }: DashboardProps) {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Zap className={ICON_SIZES.cardHeader} />
-            <span className={TYPOGRAPHY.cardTitle}>Quick Actions</span>
+            <Zap className="w-5 h-5" />
+            Quick Actions
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${SPACING.gridGap}`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {quickActions.map((action, index) => (
               <button
                 key={index}
@@ -147,10 +146,10 @@ export function Dashboard({ onQuickInvoice, onQuickBilling }: DashboardProps) {
                 className={`p-4 rounded-lg border transition-all duration-200 hover:shadow-md text-left ${action.color}`}
               >
                 <div className="flex items-start justify-between mb-2">
-                  <action.icon className={`${ICON_SIZES.sectionHeader} ${action.iconColor}`} />
+                  <action.icon className={`w-6 h-6 ${action.iconColor}`} />
                 </div>
-                <h3 className={`${TYPOGRAPHY.label} mb-1`}>{action.title}</h3>
-                <p className={`${TYPOGRAPHY.bodySmall} opacity-80`}>{action.description}</p>
+                <h3 className="font-medium mb-1">{action.title}</h3>
+                <p className="text-sm opacity-80">{action.description}</p>
               </button>
             ))}
           </div>
@@ -158,20 +157,20 @@ export function Dashboard({ onQuickInvoice, onQuickBilling }: DashboardProps) {
       </Card>
 
       {/* Stats */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${SPACING.gridGapLarge}`}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, index) => (
           <Card key={index}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className={TYPOGRAPHY.metricLabel}>{stat.title}</CardTitle>
-              <stat.icon className={`${ICON_SIZES.metricIcon} text-muted-foreground`} />
+              <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+              <stat.icon className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className={TYPOGRAPHY.metricValue}>{stat.value}</div>
-              <p className={`${TYPOGRAPHY.metricChange} flex items-center gap-1`}>
+              <div className="text-2xl font-bold">{stat.value}</div>
+              <p className="text-xs text-muted-foreground flex items-center gap-1">
                 {stat.trend === 'up' ? (
-                  <TrendingUp className={`${ICON_SIZES.statusIconSmall} text-green-500`} />
+                  <TrendingUp className="h-3 w-3 text-green-500" />
                 ) : (
-                  <TrendingDown className={`${ICON_SIZES.statusIconSmall} text-red-500`} />
+                  <TrendingDown className="h-3 w-3 text-red-500" />
                 )}
                 {stat.change} from last month
               </p>
@@ -181,19 +180,19 @@ export function Dashboard({ onQuickInvoice, onQuickBilling }: DashboardProps) {
       </div>
 
       {/* Recent Activity */}
-      <div className={`grid grid-cols-1 lg:grid-cols-2 ${SPACING.gridGapLarge}`}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle className={TYPOGRAPHY.cardTitle}>Recent Activity</CardTitle>
+            <CardTitle>Recent Activity</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className={SPACING.sectionContainer}>
+            <div className="space-y-4">
               {recentActivities.map((activity) => (
                 <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
                   {getStatusIcon(activity.status)}
                   <div className="flex-1 min-w-0">
-                    <p className={TYPOGRAPHY.body}>{activity.message}</p>
-                    <p className={`${TYPOGRAPHY.bodySmall} text-muted-foreground mt-1`}>{activity.time}</p>
+                    <p className="text-sm">{activity.message}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{activity.time}</p>
                   </div>
                 </div>
               ))}
@@ -203,24 +202,24 @@ export function Dashboard({ onQuickInvoice, onQuickBilling }: DashboardProps) {
 
         <Card>
           <CardHeader>
-            <CardTitle className={TYPOGRAPHY.cardTitle}>Quick Stats</CardTitle>
+            <CardTitle>Quick Stats</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className={SPACING.sectionContainer}>
+            <div className="space-y-4">
               <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-                <span className={TYPOGRAPHY.body}>Overdue Invoices</span>
+                <span className="text-sm">Overdue Invoices</span>
                 <Badge variant="destructive">5</Badge>
               </div>
               <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-                <span className={TYPOGRAPHY.body}>Draft Invoices</span>
+                <span className="text-sm">Draft Invoices</span>
                 <Badge variant="secondary">12</Badge>
               </div>
               <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-                <span className={TYPOGRAPHY.body}>Paid This Month</span>
+                <span className="text-sm">Paid This Month</span>
                 <Badge variant="outline">₹8,45,670</Badge>
               </div>
               <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-                <span className={TYPOGRAPHY.body}>Pending Payments</span>
+                <span className="text-sm">Pending Payments</span>
                 <Badge variant="secondary">₹2,34,890</Badge>
               </div>
             </div>

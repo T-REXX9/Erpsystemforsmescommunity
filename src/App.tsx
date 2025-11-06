@@ -13,7 +13,7 @@ export default function App() {
     navigateToModule,
     navigateToQuickInvoice,
     navigateToQuickBilling,
-  } = useModuleNavigation('home');
+  } = useModuleNavigation('dashboard');
 
   return (
     <AuthProvider>

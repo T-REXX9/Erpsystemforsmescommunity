@@ -1,6 +1,5 @@
 import { SidebarProvider } from './ui/sidebar';
-import { AppSidebar } from './layout/AppSidebar';
-import { AppHeader } from './layout/AppHeader';
+import { AppSidebar, AppHeader } from './layout';
 import { useTheme } from '../hooks';
 import { LayoutProps } from '../types';
 
