@@ -1,4 +1,8 @@
-import { Sidebar } from '../ui/sidebar';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarRail,
+} from '../ui/sidebar';
 import { SidebarHeader } from './SidebarHeader';
 import { SidebarNav } from './SidebarNav';
 import { SidebarFooter } from './SidebarFooter';
@@ -13,10 +17,13 @@ interface AppSidebarProps {
 
 export function AppSidebar({ activeModule, onModuleChange, isDark, onToggleTheme }: AppSidebarProps) {
   return (
-    <Sidebar variant="inset">
+    <Sidebar collapsible="icon" variant="sidebar">
       <SidebarHeader />
-      <SidebarNav activeModule={activeModule} onModuleChange={onModuleChange} />
+      <SidebarContent>
+        <SidebarNav activeModule={activeModule} onModuleChange={onModuleChange} />
+      </SidebarContent>
       <SidebarFooter isDark={isDark} onToggleTheme={onToggleTheme} />
+      <SidebarRail />
     </Sidebar>
   );
 }

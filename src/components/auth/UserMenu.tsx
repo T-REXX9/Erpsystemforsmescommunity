@@ -13,7 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { LogOut, User, Settings } from 'lucide-react';
+import { SidebarMenuButton } from '../ui/sidebar';
+import { LogOut, User, Settings, ChevronsUpDown } from 'lucide-react';
 import { Badge } from '../ui/badge';
 
 export function UserMenu() {
@@ -54,27 +55,37 @@ export function UserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={user.avatar_url} />
-            <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+        <SidebarMenuButton
+          size="lg"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+        >
+          <Avatar className="h-8 w-8 rounded-lg">
+            <AvatarImage src={user.avatar_url} alt={user.name} />
+            <AvatarFallback className="rounded-lg">{getInitials(user.name)}</AvatarFallback>
           </Avatar>
-          <div className="flex-1 text-left">
-            <p className="text-sm">{user.name}</p>
-            <Badge 
-              className={`text-xs ${getRoleBadgeColor(user.role)} text-white`}
-              variant="secondary"
-            >
-              {formatRole(user.role)}
-            </Badge>
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <span className="truncate font-semibold">{user.name}</span>
+            <span className="truncate text-xs text-muted-foreground">{formatRole(user.role)}</span>
           </div>
-        </button>
+          <ChevronsUpDown className="ml-auto size-4" />
+        </SidebarMenuButton>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>
-          <div>
-            <p>{user.name}</p>
-            <p className="text-xs text-muted-foreground">{user.email}</p>
+      <DropdownMenuContent
+        className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+        side="bottom"
+        align="end"
+        sideOffset={4}
+      >
+        <DropdownMenuLabel className="p-0 font-normal">
+          <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+            <Avatar className="h-8 w-8 rounded-lg">
+              <AvatarImage src={user.avatar_url} alt={user.name} />
+              <AvatarFallback className="rounded-lg">{getInitials(user.name)}</AvatarFallback>
+            </Avatar>
+            <div className="grid flex-1 text-left text-sm leading-tight">
+              <span className="truncate font-semibold">{user.name}</span>
+              <span className="truncate text-xs text-muted-foreground">{user.email}</span>
+            </div>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

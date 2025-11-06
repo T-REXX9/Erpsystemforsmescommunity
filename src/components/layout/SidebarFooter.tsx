@@ -1,7 +1,11 @@
 import { motion } from 'motion/react';
 import { Moon, Sun } from 'lucide-react';
-import { SidebarFooter as ShadcnSidebarFooter } from '../ui/sidebar';
-import { Button } from '../ui/button';
+import {
+  SidebarFooter as ShadcnSidebarFooter,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from '../ui/sidebar';
 import { ANIMATION_CONFIG } from '../../constants';
 import { UserMenu } from '../auth/UserMenu';
 
@@ -12,29 +16,31 @@ interface SidebarFooterProps {
 
 export function SidebarFooter({ isDark, onToggleTheme }: SidebarFooterProps) {
   return (
-    <ShadcnSidebarFooter>
-      <motion.div {...ANIMATION_CONFIG.footer} className="p-4 space-y-4">
+    <ShadcnSidebarFooter className="border-t border-sidebar-border mt-auto">
+      <SidebarMenu>
         {/* User Menu */}
-        <UserMenu />
-        
+        <SidebarMenuItem>
+          <UserMenu />
+        </SidebarMenuItem>
+
         {/* Theme Toggle */}
-        <motion.div {...ANIMATION_CONFIG.button}>
-          <Button
-            variant="outline"
-            size="sm"
+        <SidebarMenuItem>
+          <SidebarMenuButton
             onClick={onToggleTheme}
-            className="w-full gap-2 transition-all duration-200"
+            tooltip={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            className="w-full transition-all duration-200 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md"
           >
             <motion.div
               animate={{ rotate: isDark ? 180 : 0 }}
               transition={{ duration: 0.3 }}
+              className="text-sidebar-foreground/70"
             >
-              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </motion.div>
-            {isDark ? 'Light Mode' : 'Dark Mode'}
-          </Button>
-        </motion.div>
-      </motion.div>
+            <span className="text-sidebar-foreground/90">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
     </ShadcnSidebarFooter>
   );
 }

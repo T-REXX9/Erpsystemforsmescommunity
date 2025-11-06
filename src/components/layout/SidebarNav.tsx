@@ -1,5 +1,4 @@
 import {
-  SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -18,23 +17,23 @@ export function SidebarNav({ activeModule, onModuleChange }: SidebarNavProps) {
   const menuItems = useFilteredMenu();
 
   return (
-    <SidebarContent>
-      <SidebarGroup>
-        <SidebarGroupLabel>Navigation</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {menuItems.map((item, index) => (
-              <SidebarMenuItem
-                key={item.id}
-                item={item}
-                activeModule={activeModule}
-                onModuleChange={onModuleChange}
-                index={index}
-              />
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-    </SidebarContent>
+    <SidebarGroup className="px-2">
+      <SidebarGroupLabel className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider px-2">
+        Navigation
+      </SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu className="gap-1">
+          {menuItems.map((item, index) => (
+            <SidebarMenuItem
+              key={item.id}
+              item={item}
+              activeModule={activeModule}
+              onModuleChange={onModuleChange}
+              index={index}
+            />
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
   );
 }

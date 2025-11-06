@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { cn } from '../ui/utils';
 import {
   SidebarMenuItem as ShadcnSidebarMenuItem,
@@ -8,6 +8,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from '../ui/sidebar';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
 import { MenuItem, ModuleId } from '../../types';
@@ -42,26 +43,29 @@ function NestedSubItem({
       <SidebarMenuSubItem>
         <Collapsible open={isSubOpen} onOpenChange={setIsSubOpen}>
           <CollapsibleTrigger asChild>
-            <SidebarMenuSubButton className="w-full justify-between transition-all duration-200 hover:bg-sidebar-accent/30">
+            <SidebarMenuSubButton className={cn(
+              "w-full justify-between transition-all duration-200 rounded-md",
+              "hover:bg-sidebar-accent/40 hover:text-sidebar-accent-foreground"
+            )}>
               <div className="flex items-center gap-2.5">
                 <motion.div
                   whileHover={{ scale: 1.15 }}
                   transition={{ type: 'spring', stiffness: 400 }}
                 >
-                  <subItem.icon className={ICON_SIZES.menuLevel2} />
+                  <subItem.icon className={cn(ICON_SIZES.menuLevel2, "text-sidebar-foreground/60")} />
                 </motion.div>
-                <span className={TYPOGRAPHY.menuLevel2}>{subItem.title}</span>
+                <span className={cn(TYPOGRAPHY.menuLevel2, "text-sidebar-foreground/90")}>{subItem.title}</span>
               </div>
               <motion.div
-                animate={{ rotate: isSubOpen ? 180 : 0 }}
+                animate={{ rotate: isSubOpen ? 90 : 0 }}
                 transition={ANIMATION_CONFIG.chevron.transition}
               >
-                <ChevronDown className={ICON_SIZES.menuChevron} />
+                <ChevronRight className={cn(ICON_SIZES.menuChevron, "text-sidebar-foreground/40")} />
               </motion.div>
             </SidebarMenuSubButton>
           </CollapsibleTrigger>
           <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
-            <SidebarMenuSub className="ml-3">
+            <SidebarMenuSub className="ml-3 border-l pl-4">
               <AnimatePresence>
                 {isSubOpen && subItem.subItems.map((nestedItem, nestedIndex) => (
                   <motion.div
@@ -76,9 +80,11 @@ function NestedSubItem({
                       <SidebarMenuSubButton
                         asChild
                         onClick={() => onModuleChange(nestedItem.id)}
+                        isActive={activeModule === nestedItem.id}
                         className={cn(
-                          'transition-all duration-200 hover:translate-x-1',
-                          activeModule === nestedItem.id && 'bg-sidebar-accent text-sidebar-accent-foreground'
+                          'transition-all duration-200 rounded-md',
+                          'hover:translate-x-1 hover:bg-sidebar-accent/30',
+                          activeModule === nestedItem.id && 'bg-sidebar-accent text-sidebar-accent-foreground font-medium shadow-sm'
                         )}
                       >
                         <a href="#" className="flex items-center gap-2">
@@ -86,9 +92,15 @@ function NestedSubItem({
                             whileHover={{ scale: 1.15 }}
                             transition={{ type: 'spring', stiffness: 400 }}
                           >
-                            <nestedItem.icon className={ICON_SIZES.menuLevel3} />
+                            <nestedItem.icon className={cn(
+                              ICON_SIZES.menuLevel3,
+                              activeModule === nestedItem.id ? "text-sidebar-accent-foreground" : "text-sidebar-foreground/50"
+                            )} />
                           </motion.div>
-                          <span className={TYPOGRAPHY.menuLevel3}>{nestedItem.title}</span>
+                          <span className={cn(
+                            TYPOGRAPHY.menuLevel3,
+                            activeModule === nestedItem.id ? "text-sidebar-accent-foreground" : "text-sidebar-foreground/80"
+                          )}>{nestedItem.title}</span>
                         </a>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
@@ -108,9 +120,11 @@ function NestedSubItem({
       <SidebarMenuSubButton
         asChild
         onClick={() => onModuleChange(subItem.id)}
+        isActive={activeModule === subItem.id}
         className={cn(
-          'transition-all duration-200 hover:translate-x-1',
-          activeModule === subItem.id && 'bg-sidebar-accent text-sidebar-accent-foreground'
+          'transition-all duration-200 rounded-md',
+          'hover:translate-x-1 hover:bg-sidebar-accent/30',
+          activeModule === subItem.id && 'bg-sidebar-accent text-sidebar-accent-foreground font-medium shadow-sm'
         )}
       >
         <a href="#" className="flex items-center gap-2.5">
@@ -118,9 +132,15 @@ function NestedSubItem({
             whileHover={{ scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 400 }}
           >
-            <subItem.icon className={ICON_SIZES.menuLevel2} />
+            <subItem.icon className={cn(
+              ICON_SIZES.menuLevel2,
+              activeModule === subItem.id ? "text-sidebar-accent-foreground" : "text-sidebar-foreground/60"
+            )} />
           </motion.div>
-          <span className={TYPOGRAPHY.menuLevel2}>{subItem.title}</span>
+          <span className={cn(
+            TYPOGRAPHY.menuLevel2,
+            activeModule === subItem.id ? "text-sidebar-accent-foreground" : "text-sidebar-foreground/90"
+          )}>{subItem.title}</span>
         </a>
       </SidebarMenuSubButton>
     </SidebarMenuSubItem>
@@ -129,6 +149,7 @@ function NestedSubItem({
 
 export function SidebarMenuItem({ item, activeModule, onModuleChange, index }: SidebarMenuItemProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { state } = useSidebar();
 
   if (item.subItems) {
     // Level 1: Top-level menu items (HOME, WAREHOUSE, SALES, ACCOUNTING, etc.)
@@ -141,23 +162,33 @@ export function SidebarMenuItem({ item, activeModule, onModuleChange, index }: S
         <ShadcnSidebarMenuItem>
           <Collapsible open={isOpen} onOpenChange={setIsOpen}>
             <CollapsibleTrigger asChild>
-              <SidebarMenuButton className="w-full justify-between transition-all duration-200 hover:bg-sidebar-accent/50">
+              <SidebarMenuButton
+                tooltip={item.title}
+                className={cn(
+                  "w-full justify-between transition-all duration-200 rounded-md",
+                  "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                  "data-[state=open]:bg-sidebar-accent/50 data-[state=open]:text-sidebar-accent-foreground"
+                )}
+              >
                 <div className="flex items-center gap-3">
                   <motion.div {...ANIMATION_CONFIG.iconHover}>
-                    <item.icon className={ICON_SIZES.menuLevel1} />
+                    <item.icon className={cn(ICON_SIZES.menuLevel1, "text-sidebar-foreground/70")} />
                   </motion.div>
-                  <span className={TYPOGRAPHY.menuLevel1}>{item.title}</span>
+                  <span className={cn(TYPOGRAPHY.menuLevel1, "text-sidebar-foreground")}>{item.title}</span>
                 </div>
                 <motion.div
-                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  animate={{ rotate: isOpen ? 90 : 0 }}
                   transition={ANIMATION_CONFIG.chevron.transition}
                 >
-                  <ChevronDown className={ICON_SIZES.menuChevron} />
+                  <ChevronRight className={cn(
+                    ICON_SIZES.menuChevron,
+                    "text-sidebar-foreground/50 transition-transform duration-200"
+                  )} />
                 </motion.div>
               </SidebarMenuButton>
             </CollapsibleTrigger>
             <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
-              <SidebarMenuSub>
+              <SidebarMenuSub className="ml-0 border-l-2 border-sidebar-border pl-4">
                 <AnimatePresence>
                   {isOpen && item.subItems.map((subItem, subIndex) => (
                     <motion.div
@@ -195,16 +226,25 @@ export function SidebarMenuItem({ item, activeModule, onModuleChange, index }: S
         <SidebarMenuButton
           asChild
           onClick={() => onModuleChange(item.id)}
+          tooltip={item.title}
+          isActive={activeModule === item.id}
           className={cn(
-            'transition-all duration-200 hover:bg-sidebar-accent/50',
-            activeModule === item.id && 'bg-sidebar-accent text-sidebar-accent-foreground'
+            'transition-all duration-200 rounded-md',
+            'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+            activeModule === item.id && 'bg-sidebar-accent text-sidebar-accent-foreground font-semibold shadow-sm'
           )}
         >
           <a href="#" className="flex items-center gap-3">
             <motion.div {...ANIMATION_CONFIG.iconHover}>
-              <item.icon className={ICON_SIZES.menuLevel1} />
+              <item.icon className={cn(
+                ICON_SIZES.menuLevel1,
+                activeModule === item.id ? "text-sidebar-accent-foreground" : "text-sidebar-foreground/70"
+              )} />
             </motion.div>
-            <span className={TYPOGRAPHY.menuLevel1}>{item.title}</span>
+            <span className={cn(
+              TYPOGRAPHY.menuLevel1,
+              activeModule === item.id ? "text-sidebar-accent-foreground" : "text-sidebar-foreground"
+            )}>{item.title}</span>
           </a>
         </SidebarMenuButton>
       </ShadcnSidebarMenuItem>
