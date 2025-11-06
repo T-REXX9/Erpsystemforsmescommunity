@@ -58,6 +58,8 @@
       },
       "scripts": {
           "dev": "vite",
-          "build": "vite build"
+          "build": "vite build",
+          "seed": "node scripts/seed-users.js",
+          "dev:seed": "npm run seed && npm run dev"
       }
   }

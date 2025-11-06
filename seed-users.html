@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed Users - ERP System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .result-item {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .result-item.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        
+        .result-item.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .result-item.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .credentials {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff3cd;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .credentials h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .credential-item {
+            background: white;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 Seed Users</h1>
+        <p class="subtitle">Create demo users for the ERP System</p>
+        
+        <button class="button" id="seedButton" onclick="seedUsers()">
+            Create Demo Users
+        </button>
+        
+        <div class="results" id="results"></div>
+        
+        <div class="credentials">
+            <h3>📋 Demo User Credentials</h3>
+            <div class="credential-item">👑 admin@company.com / admin123 (Super Admin)</div>
+            <div class="credential-item">👔 manager@company.com / manager123 (Manager)</div>
+            <div class="credential-item">💰 accountant@company.com / accountant123 (Accountant)</div>
+            <div class="credential-item">📦 inventory@company.com / inventory123 (Inventory Manager)</div>
+            <div class="credential-item">👥 hr@company.com / hr123 (HR Manager)</div>
+            <div class="credential-item">💼 sales@company.com / sales123 (Sales)</div>
+            <div class="credential-item">👁️ viewer@company.com / viewer123 (Viewer)</div>
+        </div>
+    </div>
+
+    <script>
+        const SERVER_URL = 'https://jajjvvlmmwtsooeeomdy.supabase.co/functions/v1/make-server-fe7e8957';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imphamp2dmxtbXd0c29vZWVvbWR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0MjU2NDAsImV4cCI6MjA3ODAwMTY0MH0.adV8BFODKcZlvyYUDx4bl1_CNSYlhupa50mqECJyxRE';
+
+        const SEED_USERS = [
+            { email: 'admin@company.com', password: 'admin123', name: 'Admin User', role: 'super_admin' },
+            { email: 'manager@company.com', password: 'manager123', name: 'Manager User', role: 'manager' },
+            { email: 'accountant@company.com', password: 'accountant123', name: 'Accountant User', role: 'accountant' },
+            { email: 'inventory@company.com', password: 'inventory123', name: 'Inventory Manager', role: 'inventory_manager' },
+            { email: 'hr@company.com', password: 'hr123', name: 'HR Manager', role: 'hr_manager' },
+            { email: 'sales@company.com', password: 'sales123', name: 'Sales User', role: 'sales' },
+            { email: 'viewer@company.com', password: 'viewer123', name: 'Viewer User', role: 'viewer' },
+        ];
+
+        async function seedUsers() {
+            const button = document.getElementById('seedButton');
+            const resultsDiv = document.getElementById('results');
+            
+            button.disabled = true;
+            button.innerHTML = '<span class="loading"></span> Creating users...';
+            resultsDiv.innerHTML = '';
+            resultsDiv.classList.add('show');
+            
+            const results = {
+                success: [],
+                failed: []
+            };
+
+            resultsDiv.innerHTML += '<div class="result-item info"><span class="icon">🌱</span>Starting user seeding...</div>';
+
+            for (const user of SEED_USERS) {
+                try {
+                    const response = await fetch(`${SERVER_URL}/auth/signup`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(user),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        results.success.push(user.email);
+                        resultsDiv.innerHTML += `<div class="result-item success"><span class="icon">✅</span>${user.email} (${user.role})</div>`;
+                    } else {
+                        results.failed.push({ email: user.email, error: data.error });
+                        resultsDiv.innerHTML += `<div class="result-item error"><span class="icon">❌</span>${user.email}: ${data.error}</div>`;
+                    }
+                } catch (error) {
+                    results.failed.push({ email: user.email, error: error.message });
+                    resultsDiv.innerHTML += `<div class="result-item error"><span class="icon">❌</span>${user.email}: ${error.message}</div>`;
+                }
+            }
+
+            const summary = `
+                <div class="summary">
+                    🎉 Seeding complete! ${results.success.length}/${SEED_USERS.length} users created successfully
+                </div>
+            `;
+            resultsDiv.innerHTML += summary;
+
+            button.disabled = false;
+            button.innerHTML = 'Create Demo Users';
+        }
+    </script>
+</body>
+</html>
+
