@@ -1,12 +1,27 @@
 /**
  * Seed Users Script
  * Creates initial test users for different roles
- * 
+ *
  * Run with: npm run seed
  */
 
-const SERVER_URL = 'https://jajjvvlmmwtsooeeomdy.supabase.co/functions/v1/make-server-fe7e8957';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imphamp2dmxtbXd0c29vZWVvbWR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0MjU2NDAsImV4cCI6MjA3ODAwMTY0MH0.adV8BFODKcZlvyYUDx4bl1_CNSYlhupa50mqECJyxRE';
+// Load environment variables from .env file
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load .env from project root
+config({ path: join(__dirname, '..', '.env') });
+
+// Get configuration from environment variables
+const SUPABASE_PROJECT_ID = process.env.VITE_SUPABASE_PROJECT_ID || 'jajjvvlmmwtsooeeomdy';
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL || `https://${SUPABASE_PROJECT_ID}.supabase.co`;
+const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imphamp2dmxtbXd0c29vZWVvbWR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0MjU2NDAsImV4cCI6MjA3ODAwMTY0MH0.adV8BFODKcZlvyYUDx4bl1_CNSYlhupa50mqECJyxRE';
+
+const SERVER_URL = `${SUPABASE_URL}/functions/v1/make-server-fe7e8957`;
 
 const SEED_USERS = [
   {

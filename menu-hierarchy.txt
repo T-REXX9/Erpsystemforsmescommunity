@@ -1,0 +1,90 @@
+{
+  "HOME": null,
+  "WAREHOUSE": {
+    "INVENTORY": [
+      "Stock Movement",
+      "Product Database",
+      "Transfer Stock",
+      "Inventory Audit"
+    ],
+    "PURCHASING": [
+      "Purchase Request",
+      "Purchase Order",
+      "Receiving Stock",
+      "Return to Supplier"
+    ],
+    "REPORTS": [
+      "Inventory Report",
+      "Reorder Report",
+      "Item Suggested for Stock Report",
+      "Fast/Slow Inventory Report"
+    ]
+  },
+  "SALES": {
+    "TRANSACTION": [
+      "Sales Inquiry",
+      "Sales Order",
+      "Order Slip",
+      "Invoice"
+    ],
+    "REPORTS": [
+      "Inquiry Report",
+      "Sales Report",
+      "Sales Development Report"
+    ]
+  },
+  "ACCOUNTING": {
+    "TRANSACTIONS": [
+      "Freight Charges (Debit)",
+      "Sales Return (Credit)",
+      "Adjustment Entry (Debit/Credit)",
+      "Daily Collection Entry"
+    ],
+    "ACCOUNTING": [
+      "Customer Ledger",
+      "Collection Summary",
+      "Statement of Account",
+      "Accounts Receivable"
+    ],
+    "REPORTS": [
+      "Freight Charges (Debit) Report",
+      "Sales Return (Credit) Report",
+      "Purchase History",
+      "Inactive/Active Customers",
+      "Old/New Customers",
+      "Daily Calls Monitoring"
+    ]
+  },
+  "MAINTENANCE": {
+    "CUSTOMER": [
+      "Customer Data",
+      "Daily Call Monitoring",
+      "Customer Group"
+    ],
+    "PRODUCT": [
+      "Suppliers",
+      "Special Price",
+      "Category Management",
+      "Courier Management",
+      "Remark Templates"
+    ],
+    "PROFILE": [
+      "Staff",
+      "Team",
+      "Approver",
+      "Activity Logs",
+      "System Access",
+      "Server Maintenance"
+    ]
+  },
+  "COMMUNICATION": {
+    "TEXT MENU": [
+      "Text Messages",
+      "Inbox",
+      "Sent",
+      "Pending",
+      "Failed",
+      "Operator"
+    ]
+  }
+}

@@ -1,11 +1,94 @@
 import { LucideIcon } from 'lucide-react';
 
 // Module types
-export type ModuleId = 
-  | 'dashboard'
+export type ModuleId =
+  // Core
+  | 'home'
+  | 'dashboard' // Keep for backwards compatibility
+
+  // Warehouse Module
+  | 'warehouse'
+  | 'warehouse-inventory'
+  | 'stock-movement'
+  | 'product-database'
+  | 'transfer-stock'
+  | 'inventory-audit'
+  | 'warehouse-purchasing'
+  | 'purchase-request'
+  | 'purchase-order'
+  | 'receiving-stock'
+  | 'return-to-supplier'
+  | 'warehouse-reports'
+  | 'inventory-report'
+  | 'reorder-report'
+  | 'item-suggested-stock-report'
+  | 'fast-slow-inventory-report'
+
+  // Sales Module
+  | 'sales'
+  | 'sales-transaction'
+  | 'sales-inquiry'
+  | 'sales-order'
+  | 'order-slip'
+  | 'invoice'
+  | 'sales-reports'
+  | 'inquiry-report'
+  | 'sales-report'
+  | 'sales-development-report'
+
+  // Accounting Module
+  | 'accounting'
+  | 'accounting-transactions'
+  | 'freight-charges-debit'
+  | 'sales-return-credit'
+  | 'adjustment-entry'
+  | 'daily-collection-entry'
+  | 'accounting-accounting'
+  | 'customer-ledger'
+  | 'collection-summary'
+  | 'statement-of-account'
+  | 'accounts-receivable'
+  | 'accounting-reports'
+  | 'freight-charges-report'
+  | 'sales-return-report'
+  | 'purchase-history'
+  | 'inactive-active-customers'
+  | 'old-new-customers'
+  | 'daily-calls-monitoring'
+
+  // Maintenance Module
+  | 'maintenance'
+  | 'maintenance-customer'
+  | 'customer-data'
+  | 'daily-call-monitoring'
+  | 'customer-group'
+  | 'maintenance-product'
+  | 'suppliers'
+  | 'special-price'
+  | 'category-management'
+  | 'courier-management'
+  | 'remark-templates'
+  | 'maintenance-profile'
+  | 'staff'
+  | 'team'
+  | 'approver'
+  | 'activity-logs'
+  | 'system-access'
+  | 'server-maintenance'
+
+  // Communication Module
+  | 'communication'
+  | 'text-menu'
+  | 'text-messages'
+  | 'inbox'
+  | 'sent'
+  | 'pending'
+  | 'failed'
+  | 'operator'
+
+  // Legacy/Keep for backwards compatibility
   | 'quick-invoice'
   | 'quick-billing'
-  | 'accounting'
   | 'ledger'
   | 'invoicing'
   | 'reports'
