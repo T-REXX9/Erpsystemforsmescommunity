@@ -33,6 +33,7 @@ import {
   TableRow,
 } from './ui/table';
 import { Badge } from './ui/badge';
+import { TYPOGRAPHY, ICON_SIZES, SPACING } from '../constants';
 
 export function AccountingNew() {
   // Mock data for transactions
@@ -62,33 +63,33 @@ export function AccountingNew() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className={SPACING.pageContainer}>
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Accounting</h1>
-          <p className="text-muted-foreground">Manage transactions, ledgers, and financial reports</p>
+          <h1 className={TYPOGRAPHY.pageTitle}>Accounting</h1>
+          <p className={TYPOGRAPHY.pageSubtitle}>Manage transactions, ledgers, and financial reports</p>
         </div>
         <Button className="gap-2">
-          <Plus className="w-4 h-4" />
-          New Entry
+          <Plus className={ICON_SIZES.buttonDefault} />
+          <span className={TYPOGRAPHY.body}>New Entry</span>
         </Button>
       </div>
 
       {/* Tabs for different sections */}
-      <Tabs defaultValue="transactions" className="space-y-4">
+      <Tabs defaultValue="transactions" className={SPACING.sectionContainer}>
         <TabsList>
           <TabsTrigger value="transactions" className="gap-2">
-            <Wallet className="w-4 h-4" />
-            Transactions
+            <Wallet className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Transactions</span>
           </TabsTrigger>
           <TabsTrigger value="accounting" className="gap-2">
-            <BookOpen className="w-4 h-4" />
-            Accounting
+            <BookOpen className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Accounting</span>
           </TabsTrigger>
           <TabsTrigger value="reports" className="gap-2">
-            <FileBarChart className="w-4 h-4" />
-            Reports
+            <FileBarChart className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Reports</span>
           </TabsTrigger>
         </TabsList>
 

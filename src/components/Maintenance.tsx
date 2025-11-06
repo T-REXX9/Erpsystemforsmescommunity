@@ -32,6 +32,7 @@ import {
   TableRow,
 } from './ui/table';
 import { Badge } from './ui/badge';
+import { TYPOGRAPHY, ICON_SIZES, SPACING } from '../constants';
 
 export function Maintenance() {
   // Mock data for customers
@@ -67,33 +68,33 @@ export function Maintenance() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className={SPACING.pageContainer}>
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Maintenance</h1>
-          <p className="text-muted-foreground">Manage customers, products, and profiles</p>
+          <h1 className={TYPOGRAPHY.pageTitle}>Maintenance</h1>
+          <p className={TYPOGRAPHY.pageSubtitle}>Manage customers, products, and profiles</p>
         </div>
         <Button className="gap-2">
-          <Plus className="w-4 h-4" />
-          New Entry
+          <Plus className={ICON_SIZES.buttonDefault} />
+          <span className={TYPOGRAPHY.body}>New Entry</span>
         </Button>
       </div>
 
       {/* Tabs for different sections */}
-      <Tabs defaultValue="customer" className="space-y-4">
+      <Tabs defaultValue="customer" className={SPACING.sectionContainer}>
         <TabsList>
           <TabsTrigger value="customer" className="gap-2">
-            <UsersRound className="w-4 h-4" />
-            Customer
+            <UsersRound className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Customer</span>
           </TabsTrigger>
           <TabsTrigger value="product" className="gap-2">
-            <Package className="w-4 h-4" />
-            Product
+            <Package className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Product</span>
           </TabsTrigger>
           <TabsTrigger value="profile" className="gap-2">
-            <UserCog className="w-4 h-4" />
-            Profile
+            <UserCog className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Profile</span>
           </TabsTrigger>
         </TabsList>
 

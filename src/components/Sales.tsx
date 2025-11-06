@@ -26,6 +26,7 @@ import {
   TableRow,
 } from './ui/table';
 import { Badge } from './ui/badge';
+import { TYPOGRAPHY, ICON_SIZES, SPACING } from '../constants';
 
 export function Sales() {
   // Mock data for sales transactions
@@ -60,30 +61,30 @@ export function Sales() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className={SPACING.pageContainer}>
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Sales Management</h1>
-          <p className="text-muted-foreground">Manage sales transactions and view reports</p>
+          <h1 className={TYPOGRAPHY.pageTitle}>Sales Management</h1>
+          <p className={TYPOGRAPHY.pageSubtitle}>Manage sales transactions and view reports</p>
         </div>
         <Button className="gap-2">
-          <Plus className="w-4 h-4" />
-          New Sale
+          <Plus className={ICON_SIZES.buttonDefault} />
+          <span className={TYPOGRAPHY.body}>New Sale</span>
         </Button>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className={`grid grid-cols-1 md:grid-cols-4 ${SPACING.gridGap}`}>
         {salesStats.map((stat, index) => (
           <Card key={index}>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
+              <CardTitle className={TYPOGRAPHY.metricLabel}>{stat.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-                <TrendingUp className="h-3 w-3 text-green-500" />
+              <div className={TYPOGRAPHY.metricValue}>{stat.value}</div>
+              <p className={`${TYPOGRAPHY.metricChange} flex items-center gap-1 mt-1`}>
+                <TrendingUp className={`${ICON_SIZES.statusIconSmall} text-green-500`} />
                 {stat.change} from last month
               </p>
             </CardContent>

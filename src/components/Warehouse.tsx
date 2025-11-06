@@ -30,6 +30,7 @@ import {
   TableRow,
 } from './ui/table';
 import { Badge } from './ui/badge';
+import { TYPOGRAPHY, ICON_SIZES, SPACING } from '../constants';
 
 export function Warehouse() {
   // Mock data for inventory
@@ -67,93 +68,93 @@ export function Warehouse() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className={SPACING.pageContainer}>
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Warehouse Management</h1>
-          <p className="text-muted-foreground">Manage inventory, purchasing, and warehouse reports</p>
+          <h1 className={TYPOGRAPHY.pageTitle}>Warehouse Management</h1>
+          <p className={TYPOGRAPHY.pageSubtitle}>Manage inventory, purchasing, and warehouse reports</p>
         </div>
         <Button className="gap-2">
-          <Plus className="w-4 h-4" />
-          New Entry
+          <Plus className={ICON_SIZES.buttonDefault} />
+          <span className={TYPOGRAPHY.body}>New Entry</span>
         </Button>
       </div>
 
       {/* Tabs for different sections */}
-      <Tabs defaultValue="inventory" className="space-y-4">
+      <Tabs defaultValue="inventory" className={SPACING.sectionContainer}>
         <TabsList>
           <TabsTrigger value="inventory" className="gap-2">
-            <Package className="w-4 h-4" />
-            Inventory
+            <Package className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Inventory</span>
           </TabsTrigger>
           <TabsTrigger value="purchasing" className="gap-2">
-            <ShoppingBag className="w-4 h-4" />
-            Purchasing
+            <ShoppingBag className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Purchasing</span>
           </TabsTrigger>
           <TabsTrigger value="reports" className="gap-2">
-            <FileBarChart className="w-4 h-4" />
-            Reports
+            <FileBarChart className={ICON_SIZES.buttonDefault} />
+            <span className={TYPOGRAPHY.body}>Reports</span>
           </TabsTrigger>
         </TabsList>
 
         {/* Inventory Tab */}
-        <TabsContent value="inventory" className="space-y-4">
+        <TabsContent value="inventory" className={SPACING.sectionContainer}>
           <Card>
             <CardHeader>
               <div className="flex justify-between items-center">
-                <CardTitle>Inventory Management</CardTitle>
+                <CardTitle className={TYPOGRAPHY.cardTitle}>Inventory Management</CardTitle>
                 <div className="flex gap-2">
                   <div className="relative">
-                    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Search className={`absolute left-2 top-2.5 ${ICON_SIZES.buttonDefault} text-muted-foreground`} />
                     <Input placeholder="Search products..." className="pl-8 w-[300px]" />
                   </div>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className={`grid grid-cols-1 md:grid-cols-4 ${SPACING.gridGap} mb-6`}>
                 <Button variant="outline" className="justify-start gap-2">
-                  <ArrowRightLeft className="w-4 h-4" />
-                  Stock Movement
+                  <ArrowRightLeft className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Stock Movement</span>
                 </Button>
                 <Button variant="outline" className="justify-start gap-2">
-                  <Database className="w-4 h-4" />
-                  Product Database
+                  <Database className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Product Database</span>
                 </Button>
                 <Button variant="outline" className="justify-start gap-2">
-                  <Truck className="w-4 h-4" />
-                  Transfer Stock
+                  <Truck className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Transfer Stock</span>
                 </Button>
                 <Button variant="outline" className="justify-start gap-2">
-                  <ClipboardCheck className="w-4 h-4" />
-                  Inventory Audit
+                  <ClipboardCheck className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Inventory Audit</span>
                 </Button>
               </div>
 
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Product ID</TableHead>
-                    <TableHead>Product Name</TableHead>
-                    <TableHead>Quantity</TableHead>
-                    <TableHead>Unit</TableHead>
-                    <TableHead>Location</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Actions</TableHead>
+                    <TableHead className={TYPOGRAPHY.tableHeader}>Product ID</TableHead>
+                    <TableHead className={TYPOGRAPHY.tableHeader}>Product Name</TableHead>
+                    <TableHead className={TYPOGRAPHY.tableHeader}>Quantity</TableHead>
+                    <TableHead className={TYPOGRAPHY.tableHeader}>Unit</TableHead>
+                    <TableHead className={TYPOGRAPHY.tableHeader}>Location</TableHead>
+                    <TableHead className={TYPOGRAPHY.tableHeader}>Status</TableHead>
+                    <TableHead className={TYPOGRAPHY.tableHeader}>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {inventoryItems.map((item) => (
                     <TableRow key={item.id}>
-                      <TableCell className="font-medium">{item.id}</TableCell>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.quantity}</TableCell>
-                      <TableCell>{item.unit}</TableCell>
-                      <TableCell>{item.location}</TableCell>
+                      <TableCell className={TYPOGRAPHY.tableCellBold}>{item.id}</TableCell>
+                      <TableCell className={TYPOGRAPHY.tableCell}>{item.name}</TableCell>
+                      <TableCell className={TYPOGRAPHY.tableCell}>{item.quantity}</TableCell>
+                      <TableCell className={TYPOGRAPHY.tableCell}>{item.unit}</TableCell>
+                      <TableCell className={TYPOGRAPHY.tableCell}>{item.location}</TableCell>
                       <TableCell>{getStatusBadge(item.status)}</TableCell>
                       <TableCell>
-                        <Button variant="ghost" size="sm">View</Button>
+                        <Button variant="ghost" size="sm" className={TYPOGRAPHY.body}>View</Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -164,34 +165,34 @@ export function Warehouse() {
         </TabsContent>
 
         {/* Purchasing Tab */}
-        <TabsContent value="purchasing" className="space-y-4">
+        <TabsContent value="purchasing" className={SPACING.sectionContainer}>
           <Card>
             <CardHeader>
               <div className="flex justify-between items-center">
-                <CardTitle>Purchase Management</CardTitle>
+                <CardTitle className={TYPOGRAPHY.cardTitle}>Purchase Management</CardTitle>
                 <Button className="gap-2">
-                  <Plus className="w-4 h-4" />
-                  New Purchase Order
+                  <Plus className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>New Purchase Order</span>
                 </Button>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className={`grid grid-cols-1 md:grid-cols-4 ${SPACING.gridGap} mb-6`}>
                 <Button variant="outline" className="justify-start gap-2">
-                  <FileText className="w-4 h-4" />
-                  Purchase Request
+                  <FileText className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Purchase Request</span>
                 </Button>
                 <Button variant="outline" className="justify-start gap-2">
-                  <FileEdit className="w-4 h-4" />
-                  Purchase Order
+                  <FileEdit className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Purchase Order</span>
                 </Button>
                 <Button variant="outline" className="justify-start gap-2">
-                  <PackageCheck className="w-4 h-4" />
-                  Receiving Stock
+                  <PackageCheck className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Receiving Stock</span>
                 </Button>
                 <Button variant="outline" className="justify-start gap-2">
-                  <PackageX className="w-4 h-4" />
-                  Return to Supplier
+                  <PackageX className={ICON_SIZES.buttonDefault} />
+                  <span className={TYPOGRAPHY.body}>Return to Supplier</span>
                 </Button>
               </div>
 

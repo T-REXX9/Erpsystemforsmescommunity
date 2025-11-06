@@ -24,6 +24,7 @@ import {
   TableRow,
 } from './ui/table';
 import { Badge } from './ui/badge';
+import { TYPOGRAPHY, ICON_SIZES, SPACING } from '../constants';
 
 export function Communication() {
   // Mock data for messages
@@ -64,30 +65,30 @@ export function Communication() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className={SPACING.pageContainer}>
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Communication</h1>
-          <p className="text-muted-foreground">Manage text messages and communications</p>
+          <h1 className={TYPOGRAPHY.pageTitle}>Communication</h1>
+          <p className={TYPOGRAPHY.pageSubtitle}>Manage text messages and communications</p>
         </div>
         <Button className="gap-2">
-          <Plus className="w-4 h-4" />
-          New Message
+          <Plus className={ICON_SIZES.buttonDefault} />
+          <span className={TYPOGRAPHY.body}>New Message</span>
         </Button>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className={`grid grid-cols-1 md:grid-cols-5 ${SPACING.gridGap}`}>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <Mail className="w-4 h-4" />
+            <CardTitle className={`${TYPOGRAPHY.metricLabel} flex items-center gap-2`}>
+              <Mail className={ICON_SIZES.metricIcon} />
               Total Messages
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">156</div>
+            <div className={TYPOGRAPHY.metricValue}>156</div>
           </CardContent>
         </Card>
 
